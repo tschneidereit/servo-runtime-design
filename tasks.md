@@ -142,7 +142,7 @@ Normally this'd require two files: one to implement the module, one for the Task
 // streaming_zip.js
 import {Decoder} from 'zip';
 
-export class Decoder {
+export class OffThreadDecoder {
     constructor() {
         this.readable = new ReadableStream();
         this.writable = new WritableStream();
@@ -162,7 +162,7 @@ async function main({readable, writable}) {
 
 
 // main.js
-import {Decoder} from 'streaming_zip';
+import {OffThreadDecoder} from 'streaming_zip';
 
 async function main() {
     return await loadAndDecode('some.zip');
@@ -170,7 +170,7 @@ async function main() {
 
 async function loadAndDecode(file) {
     try {
-        for await of (load(file).pipeThrough(new Decoder())) {
+        for await of (load(file).pipeThrough(new OffthreadDecoder())) {
             // Use decoded data.
         }
     } catch (error) {
