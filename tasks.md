@@ -91,7 +91,7 @@ async function main() {
 }
 
 async function loadAndDecode(file) {
-    for await of (load(file).pipeThrough(await Task.spawn('streaming_zip'))) {
+    for await (let data of (load(file).pipeThrough(await Task.spawn('streaming_zip')))) {
         // Use decoded data.
     }
 }
