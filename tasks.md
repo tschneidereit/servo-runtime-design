@@ -114,7 +114,7 @@ In the previous example, an error during file loading or in the zip decoder Task
 ```js
 async function loadAndDecode(file) {
     try {
-        for await of (load(file).pipeThrough(new Task('streaming_zip'))) {
+        for await (let data of load(file).pipeThrough(new Task('streaming_zip'))) {
             // Use decoded data.
         }
     } catch (error) {
@@ -170,7 +170,7 @@ async function main() {
 
 async function loadAndDecode(file) {
     try {
-        for await of (load(file).pipeThrough(new OffthreadDecoder())) {
+        for await (let data of load(file).pipeThrough(new OffthreadDecoder())) {
             // Use decoded data.
         }
     } catch (error) {
